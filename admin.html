@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>inware - Admin Panel</title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+</head>
+
+
+<body>
+
+    <header class="admin-header">
+
+        <div>
+            <h1>👑 Admin Panel</h1>
+
+            <p>
+                inware management
+            </p>
+        </div>
+
+        <button
+            id="backBtn"
+            class="back-btn"
+        >
+            ← Back
+        </button>
+
+    </header>
+
+
+    <main class="admin-container">
+
+        <!-- ADMIN CHECK -->
+
+        <section
+            id="loadingSection"
+            class="admin-card"
+        >
+
+            <h2>🔐 Checking access...</h2>
+
+            <p>
+                Please wait.
+            </p>
+
+        </section>
+
+
+        <!-- ADMIN DASHBOARD -->
+
+        <section
+            id="adminDashboard"
+            style="display:none;"
+        >
+
+            <div class="admin-card">
+
+                <h2>
+                    📊 Dashboard
+                </h2>
+
+                <p>
+                    Welcome to the inware Admin Panel.
+                </p>
+
+            </div>
+
+
+            <div class="admin-grid">
+
+                <div class="stat-card">
+
+                    <h3>👤 Users</h3>
+
+                    <strong id="usersCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>📸 Posts</h3>
+
+                    <strong id="postsCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>👥 Groups</h3>
+
+                    <strong id="groupsCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>💬 Messages</h3>
+
+                    <strong id="messagesCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+<!-- =========================
+     USER MANAGEMENT
+========================= -->
+
+<div class="admin-card">
+
+    <h2>👤 User Management</h2>
+
+    <input
+        type="text"
+        id="userSearch"
+        placeholder="🔍 Search username..."
+        class="admin-search"
+    >
+
+    <div id="usersList">
+        Loading users...
+    </div>
+
+</div>
+
+<!-- =========================
+     POST MANAGEMENT
+========================= -->
+
+<div class="admin-card">
+
+    <h2>📸 Post Management</h2>
+
+    <div id="postsList">
+        Loading posts...
+    </div>
+
+</div>
+
+        </section>
+
+        <!-- =========================
+     GROUP MANAGEMENT
+========================= -->
+
+<div class="admin-card">
+
+    <h2>👥 Group Management</h2>
+
+    <div id="groupsList">
+        Loading groups...
+    </div>
+
+</div>
+
+<!-- =========================
+     MESSAGE MANAGEMENT
+========================= -->
+
+<div class="admin-card">
+
+    <h2>💬 Message Management</h2>
+
+    <div id="messagesList">
+        Loading messages...
+    </div>
+
+</div>
+
+<!-- =========================
+     ADMIN SETTINGS
+========================= -->
+
+<div class="admin-card">
+
+    <h2>⚙️ Admin Settings</h2>
+
+    <p>
+        🔐 Admin-only controls
+    </p>
+
+    <div class="admin-settings">
+
+        <button
+            id="refreshAdminBtn"
+            class="admin-btn"
+        >
+            🔄 Refresh Dashboard
+        </button>
+
+        <button
+            id="adminSecurityBtn"
+            class="admin-btn"
+        >
+            🛡️ Security Status
+        </button>
+
+    </div>
+
+    <div
+        id="securityStatus"
+        style="margin-top:15px;"
+    ></div>
+
+</div>
+
+        <!-- ACCESS DENIED -->
+
+        <section
+            id="accessDenied"
+            class="admin-card"
+            style="display:none;"
+        >
+
+            <h2>
+                🚫 Access Denied
+            </h2>
+
+            <p>
+                You are not authorized to access
+                the Admin Panel.
+            </p>
+
+            <button
+                id="deniedBackBtn"
+                class="admin-btn"
+            >
+                Go Back
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

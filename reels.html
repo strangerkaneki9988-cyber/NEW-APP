@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>inware - Reels</title>
+
+    <link rel="stylesheet" href="reels.css">
+</head>
+
+<body>
+
+    <header class="reels-header">
+        <button id="backBtn">←</button>
+        <h1>Reels</h1>
+    </header>
+
+    <main id="reelsFeed">
+
+        <div class="reels-loading">
+            Loading Reels...
+        </div>
+
+    </main>
+
+<div id="commentModal" class="comment-modal" style="display:none;">
+
+    <div class="comment-box">
+
+        <div class="comment-header">
+            <h3>Comments</h3>
+            <button id="closeComments">✕</button>
+        </div>
+
+        <div id="commentsList" class="comments-list">
+            Loading comments...
+        </div>
+
+        <div class="comment-input-box">
+            <input
+                type="text"
+                id="reelCommentInput"
+                placeholder="Add a comment..."
+            >
+
+            <button id="sendReelComment">
+                Send
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="reels.js"></script>
+
+</body>
+
+</html>

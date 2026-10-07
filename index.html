@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>inware - Login</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Galaxy Background -->
+    <canvas id="galaxyCanvas"></canvas>
+
+    <!-- Login Card -->
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <div class="logo">
+                inware
+            </div>
+
+            <h1>Welcome back</h1>
+
+            <p class="subtitle">
+                Log in to continue
+            </p>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <div class="login-options">
+
+                    <label class="remember">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+
+                    <a href="#" id="forgotPassword">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+                <button type="submit" class="login-button">
+                    Log in
+                </button>
+
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <p class="signup-text">
+                Don't have an account?
+                <a href="#" id="signupLink">Sign up</a>
+            </p>
+
+            <p id="message"></p>
+
+        </div>
+
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>

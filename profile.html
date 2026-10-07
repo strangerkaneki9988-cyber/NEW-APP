@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>inware - Profile</title>
+
+    <link rel="stylesheet" href="profile.css">
+
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="profile-header">
+
+    <button id="backBtn" class="back-btn">
+        ←
+    </button>
+
+    <h1 id="profileHeaderTitle">Profile</h1>
+
+    <div class="profile-header-actions">
+
+        <button
+            id="adminPanelBtn"
+            class="header-icon-btn"
+            style="display:none;"
+            title="Admin Panel"
+        >
+            👑
+        </button>
+
+        <button
+            id="logoutBtn"
+            class="header-icon-btn logout-icon"
+            title="Logout"
+        >
+            🚪
+        </button>
+
+        <button
+            id="profileOptionsBtn"
+            class="header-icon-btn"
+            type="button"
+            aria-label="Profile options"
+            aria-expanded="false"
+        >
+            ⋮
+        </button>
+
+    </div>
+
+    <div id="profileOptionsMenu" class="profile-options-menu" hidden>
+        <button id="profileMenuShareBtn" type="button">Share profile</button>
+    </div>
+
+</header>
+
+
+    <!-- PROFILE -->
+
+    <main id="profileView" class="profile-container">
+        <section class="profile-hero">
+            <div class="profile-avatar-wrap">
+                <div class="profile-avatar" id="profileAvatar" aria-label="Profile avatar">U</div>
+                <button id="avatarUploadBtn" class="avatar-upload-btn" type="button" aria-label="Change profile picture" hidden>＋</button>
+                <input id="avatarFileInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+            </div>
+
+            <section class="profile-stats" aria-label="Profile statistics">
+                <div class="stat"><strong id="postsCount">0</strong><span>Posts</span></div>
+                <button class="stat stat-button" id="followersStat" type="button"><strong id="followersCount">0</strong><span>Followers</span></button>
+                <button class="stat stat-button" id="followingStat" type="button"><strong id="followingCount">0</strong><span>Following</span></button>
+            </section>
+
+            <div class="profile-details">
+                <h2 id="profileName">User Name</h2>
+                <p id="profileUsername">@username</p>
+                <p id="profileBio" hidden></p>
+            </div>
+
+            <div id="profileAction" class="profile-action"></div>
+        </section>
+
+        <section class="posts-section">
+            <h3><span aria-hidden="true">▦</span> Posts</h3>
+            <div id="userPosts" class="user-posts"><div class="empty-posts">Loading posts...</div></div>
+        </section>
+    </main>
+
+    <main id="editProfileView" class="profile-subview" hidden>
+        <form id="editProfileForm" class="edit-profile-form">
+            <div class="edit-avatar-section">
+                <div class="profile-avatar" id="editProfileAvatar">U</div>
+                <strong>Edit Picture</strong>
+                <button id="editAvatarBtn" class="secondary-profile-btn" type="button">Change Avatar</button>
+            </div>
+            <label class="profile-field">Name<input id="editNameInput" type="text" maxlength="80" autocomplete="name"></label>
+            <label class="profile-field">Username<input id="editUsernameInput" type="text" maxlength="30" autocomplete="username" spellcheck="false"></label>
+            <label class="profile-field">Bio<textarea id="editBioInput" rows="4" maxlength="300"></textarea></label>
+            <p id="editProfileMessage" class="profile-form-message" aria-live="polite"></p>
+            <button id="saveProfileBtn" class="primary-profile-btn" type="submit">Save</button>
+        </form>
+    </main>
+
+    <main id="connectionsView" class="profile-subview" hidden>
+        <label class="connections-search"><span aria-hidden="true">⌕</span><input id="connectionsSearchInput" type="search" placeholder="Search people..." autocomplete="off"></label>
+        <div id="connectionsList" class="connections-list"><div class="empty-posts">Loading...</div></div>
+    </main>
+
+    <div id="profileToast" class="profile-toast" role="status" aria-live="polite"></div>
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

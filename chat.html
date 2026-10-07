@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>inware - Chat</title>
+
+    <link
+        rel="stylesheet"
+        href="chat.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <!-- HEADER -->
+
+<header class="chat-header">
+
+    <button
+        id="backBtn"
+        class="back-btn"
+    >
+        ←
+    </button>
+
+    <div class="chat-user">
+
+        <div
+            id="chatAvatar"
+            class="chat-avatar"
+        >
+            U
+        </div>
+
+        <div>
+
+            <strong id="chatUsername">
+                Select user
+            </strong>
+
+            <small id="chatStatus">
+                inware
+            </small>
+
+        </div>
+
+    </div>
+
+    <div
+        id="directCallControls"
+        class="direct-call-controls"
+        hidden
+    >
+        <button
+            id="audioCallBtn"
+            class="call-action-btn"
+            type="button"
+            title="Audio Call"
+            aria-label="Audio Call"
+        >
+            📞
+        </button>
+
+        <button
+            id="videoCallBtn"
+            class="call-action-btn"
+            type="button"
+            title="Video Call"
+            aria-label="Video Call"
+        >
+            🎥
+        </button>
+    </div>
+
+    <button
+        id="newChatBtn"
+        class="new-chat-btn"
+        title="New Chat"
+    >
+        ✏️
+    </button>
+<button id="addMemberBtn" class="new-chat-btn" title="Add Member" style="display:none;">
+    👥
+</button>
+<button
+    id="editGroupBtn"
+    class="new-chat-btn"
+    title="Edit Group"
+    style="display:none;"
+>
+    ✏️
+</button>
+<button
+    id="groupSettingsBtn"
+    class="new-chat-btn"
+    title="Group Settings"
+    style="display:none;"
+>
+    ⚙️
+</button>
+<button
+    id="leaveGroupBtn"
+    class="new-chat-btn"
+    title="Leave Group"
+    style="display:none;"
+>
+    🚪
+</button>
+<button
+    id="inviteGroupBtn"
+    class="new-chat-btn"
+    title="Invite"
+    style="display:none;"
+>
+    🔗
+</button>
+<input
+    type="file"
+    id="groupAvatarInput"
+    accept="image/*"
+    style="display:none;"
+>
+
+<button
+    id="changeGroupAvatarBtn"
+    class="new-chat-btn"
+    title="Change Group Photo"
+    style="display:none;"
+>
+    📷
+</button>
+</header>
+<section id="newChatScreen" class="new-chat-screen" aria-hidden="true" hidden>
+    <header class="new-chat-screen-header">
+        <button id="newChatBackBtn" class="back-btn" type="button" aria-label="Back">←</button>
+        <h1>New Chat</h1>
+        <span aria-hidden="true"></span>
+    </header>
+    <div class="new-chat-screen-content">
+        <button id="createGroupBtn" class="create-group-btn" type="button">➕ Create Group</button>
+        <h2>Suggested</h2>
+        <label class="new-chat-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="newChatSearchInput" type="search" placeholder="Search people..." autocomplete="off">
+        </label>
+        <div id="newChatSuggestedList" class="new-chat-suggestions" aria-live="polite">
+            <div class="new-chat-empty">Loading connected people...</div>
+        </div>
+    </div>
+</section>
+<section id="groupSettingsPanel" class="group-experience" aria-hidden="true">
+    <header class="group-screen-header">
+        <button id="groupScreenBackBtn" class="back-btn" type="button" aria-label="Back">←</button>
+        <strong id="groupScreenTitle">Group info</strong>
+        <span class="group-screen-header-spacer" aria-hidden="true"></span>
+    </header>
+
+    <section id="groupInfoContent" class="group-screen group-info-view">
+        <div class="group-info-identity">
+            <div id="groupSettingsAvatar" class="group-info-avatar" aria-hidden="true">G</div>
+            <h1 id="groupSettingsName">Group</h1>
+            <p id="groupSettingsDescription">Group conversation</p>
+            <button id="settingsEditNameBtn" class="group-text-action" type="button">Change name and image</button>
+        </div>
+
+        <div class="group-info-actions" aria-label="Group actions">
+            <button id="groupInfoAddBtn" type="button"><span aria-hidden="true">＋</span><small>Add</small></button>
+            <button id="groupInfoSearchBtn" type="button" disabled aria-label="Group search unavailable"><span aria-hidden="true">⌕</span><small>Search</small></button>
+            <button id="groupInfoMuteBtn" type="button" disabled aria-label="Mute unavailable"><span aria-hidden="true">🔕</span><small>Mute</small></button>
+            <button id="groupInfoOptionsBtn" type="button"><span aria-hidden="true">⋯</span><small>Options</small></button>
+        </div>
+        <div id="groupOptionsMenu" class="group-options-menu" hidden>
+            <button id="optionsInviteBtn" type="button">Copy invite link</button>
+            <button id="optionsLeaveBtn" type="button">Leave group</button>
+        </div>
+
+        <div class="group-info-section">
+            <h2>Group settings</h2>
+            <button id="groupCustomizeBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">🎨</span>
+                <span><strong>Customize</strong><small>Theme and font · preview only</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+            <button id="settingsInviteBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">🔗</span>
+                <span><strong>Invite link</strong><small>Copy group invite link</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+            <button id="settingsMembersBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">👥</span>
+                <span><strong>People</strong><small>View and manage group members</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+            <button id="groupPrivacyBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">🔒</span>
+                <span><strong>Privacy &amp; safety</strong><small>Controls not available yet</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+            <button id="groupNicknamesBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">🏷</span>
+                <span><strong>Nicknames</strong><small>Nickname saving not available yet</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+            <button id="groupCreateAnotherBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">➕</span>
+                <span><strong>Create a new group chat</strong><small>Use the existing group creation flow</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+        </div>
+
+        <button id="groupInfoLeaveBtn" class="group-leave-action" type="button">Leave group</button>
+    </section>
+
+    <section id="groupEditContent" class="group-screen group-edit-view" hidden>
+        <div class="group-edit-identity">
+            <div id="groupEditAvatar" class="group-info-avatar" aria-hidden="true">G</div>
+            <button id="settingsPhotoBtn" class="group-text-action" type="button">Change group photo</button>
+        </div>
+        <label class="group-edit-label" for="groupEditNameInput">Group name</label>
+        <input id="groupEditNameInput" class="group-edit-name-input" type="text" maxlength="100" autocomplete="off">
+        <div id="groupEditNameCount" class="group-edit-counter">0/100</div>
+        <p class="group-screen-note">Group photo updates use the existing upload flow. Avatar choices are not available.</p>
+        <button id="groupEditDoneBtn" class="group-primary-action" type="button">Done</button>
+    </section>
+
+    <section id="groupCustomizeContent" class="group-screen group-customize-view" hidden>
+        <p class="group-screen-note">Preview only. Group font preferences are not saved yet and will not change the app theme.</p>
+        <div class="group-customize-preview">
+            <div class="group-preview-incoming">Incoming message</div>
+            <div class="group-preview-outgoing">Outgoing message</div>
+        </div>
+        <h2>Font</h2>
+        <div class="group-font-grid">
+            <button type="button" data-group-font="Default" class="is-selected">Default</button>
+            <button type="button" data-group-font="Bubble">Bubble</button>
+            <button type="button" data-group-font="Deco">Deco</button>
+            <button type="button" data-group-font="Editor">Editor</button>
+            <button type="button" data-group-font="Poster">Poster</button>
+            <button type="button" data-group-font="Serif">Serif</button>
+        </div>
+        <button id="groupCustomizeApplyBtn" class="group-primary-action" type="button">Apply preview</button>
+    </section>
+
+    <section id="groupPrivacyContent" class="group-screen group-privacy-view" hidden>
+        <div class="group-info-section">
+            <h2>Privacy</h2>
+            <div class="group-info-row is-unavailable"><span><strong>Read receipts</strong><small>Not configurable in this chat</small></span><span>Unavailable</span></div>
+            <div class="group-info-row is-unavailable"><span><strong>Typing indicator</strong><small>Current group behavior is unchanged</small></span><span>Unavailable</span></div>
+        </div>
+        <div class="group-info-section">
+            <h2>Safety</h2>
+            <div class="group-info-row is-unavailable"><span><strong>Restrict</strong><small>Not available for groups</small></span><span>Unavailable</span></div>
+            <div class="group-info-row is-unavailable"><span><strong>Block</strong><small>No group block action is configured</small></span><span>Unavailable</span></div>
+            <div class="group-info-row is-unavailable"><span><strong>Report</strong><small>No report action is configured</small></span><span>Unavailable</span></div>
+        </div>
+    </section>
+
+    <section id="groupNicknamesContent" class="group-screen group-nicknames-view" hidden>
+        <p class="group-screen-note">Nickname edits are not saved because this chat has no nickname storage.</p>
+        <div id="groupNicknamesList"></div>
+    </section>
+
+    <section id="groupPeopleContent" class="group-screen group-people-view" hidden>
+        <div id="addMemberPanel" class="group-members-panel" style="display:none;">
+            <div id="addMemberContainer">
+                <div class="loading">Loading users...</div>
+            </div>
+        </div>
+        <p id="groupPeopleUnavailable" class="group-screen-note" hidden>Member list is read-only for non-admins.</p>
+    </section>
+</section>
+<section id="directChatInfoPanel" class="direct-chat-info-panel" aria-hidden="true">
+    <header class="direct-chat-screen-header">
+        <button id="directChatInfoBackBtn" class="back-btn" type="button" aria-label="Back">←</button>
+        <strong id="directChatScreenTitle">Chat Info</strong>
+        <span class="group-screen-header-spacer" aria-hidden="true"></span>
+    </header>
+
+    <section id="directChatInfoContent" class="direct-chat-screen">
+        <div class="group-info-identity">
+            <div id="directChatInfoAvatar" class="group-info-avatar" aria-hidden="true">U</div>
+            <h1 id="directChatInfoName">User</h1>
+            <p id="directChatInfoUsername">@user</p>
+        </div>
+
+        <div class="group-info-actions" aria-label="Chat actions">
+            <button id="directChatProfileBtn" type="button"><span aria-hidden="true">◉</span><small>Profile</small></button>
+            <button id="directChatSearchBtn" type="button"><span aria-hidden="true">⌕</span><small>Search</small></button>
+            <button id="directChatMuteBtn" type="button" disabled aria-label="Mute unavailable"><span aria-hidden="true">🔕</span><small>Mute</small></button>
+            <button id="directChatOptionsBtn" type="button"><span aria-hidden="true">⋯</span><small>Options</small></button>
+        </div>
+        <div id="directChatOptionsMenu" class="group-options-menu" hidden>
+            <button type="button" disabled title="Per-user blocking is not available">Block unavailable</button>
+            <button type="button" disabled title="Reporting is not available">Report unavailable</button>
+        </div>
+
+        <div class="group-info-section">
+            <h2>Conversation</h2>
+            <button id="directChatCustomizeBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">🎨</span>
+                <span><strong>Customize</strong><small>Chat theme and font for this conversation</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+            <button id="directChatPrivacyBtn" class="group-info-row" type="button">
+                <span class="group-info-row-icon" aria-hidden="true">🔒</span>
+                <span><strong>Privacy &amp; safety</strong><small>View available controls</small></span>
+                <span class="group-settings-chevron" aria-hidden="true">›</span>
+            </button>
+            <div class="group-info-row is-unavailable">
+                <span><strong>Nicknames</strong><small>Nickname storage is not available</small></span>
+                <span>Unavailable</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="directChatCustomizeContent" class="direct-chat-screen" hidden>
+        <p class="group-screen-note">These settings apply only to this one-to-one conversation. The Inware app theme is unchanged.</p>
+        <div class="direct-chat-customize-section">
+            <h2>Chat Theme</h2>
+            <p class="direct-chat-setting-note">Choose a visual style for this conversation.</p>
+            <div class="direct-chat-theme-grid" role="group" aria-label="Chat theme">
+                <button type="button" data-direct-chat-theme="default" aria-pressed="true"><span class="theme-swatch theme-swatch-default"></span>Default</button>
+                <button type="button" data-direct-chat-theme="light" aria-pressed="false"><span class="theme-swatch theme-swatch-light"></span>Light</button>
+                <button type="button" data-direct-chat-theme="dark" aria-pressed="false"><span class="theme-swatch theme-swatch-dark"></span>Dark</button>
+                <button type="button" data-direct-chat-theme="soft" aria-pressed="false"><span class="theme-swatch theme-swatch-soft"></span>Soft</button>
+                <button type="button" data-direct-chat-theme="ocean" aria-pressed="false"><span class="theme-swatch theme-swatch-ocean"></span>Ocean</button>
+                <button type="button" data-direct-chat-theme="sunset" aria-pressed="false"><span class="theme-swatch theme-swatch-sunset"></span>Sunset</button>
+            </div>
+            <div id="directChatThemePreview" class="direct-chat-theme-preview" aria-hidden="true">
+                <span>Incoming message</span>
+                <span>Outgoing message</span>
+            </div>
+        </div>
+        <div class="direct-chat-customize-section">
+            <h2>Font</h2>
+            <p class="direct-chat-setting-note">Applied to messages and the composer in this conversation.</p>
+            <div class="direct-chat-font-grid" role="group" aria-label="Chat font">
+                <button type="button" data-direct-chat-font="default" aria-pressed="true">Default</button>
+                <button type="button" data-direct-chat-font="serif" aria-pressed="false">Serif</button>
+                <button type="button" data-direct-chat-font="rounded" aria-pressed="false">Rounded</button>
+                <button type="button" data-direct-chat-font="mono" aria-pressed="false">Mono</button>
+            </div>
+        </div>
+        <div class="direct-chat-customize-section">
+            <h2>Inware app theme</h2>
+            <p class="group-screen-note">No global theme controls are available here. App-wide appearance is not changed by Chat Theme.</p>
+        </div>
+    </section>
+
+    <section id="directChatPrivacyContent" class="direct-chat-screen" hidden>
+        <div class="group-info-section">
+            <h2>Privacy &amp; safety</h2>
+            <div class="group-info-row is-unavailable"><span><strong>Mute</strong><small>Per-chat mute is not implemented</small></span><span>Unavailable</span></div>
+            <div class="group-info-row is-unavailable"><span><strong>Block</strong><small>Only admin account blocking exists</small></span><span>Unavailable</span></div>
+            <div class="group-info-row is-unavailable"><span><strong>Report</strong><small>No report flow is configured</small></span><span>Unavailable</span></div>
+            <div class="group-info-row is-unavailable"><span><strong>Read receipts</strong><small>Not configurable for direct chats</small></span><span>Unavailable</span></div>
+        </div>
+    </section>
+</section>
+<!-- MAIN CHAT SEARCH -->
+
+<div class="chat-search activity-chat-search">
+
+    <span class="activity-search-icon" aria-hidden="true">⌕</span>
+
+    <input
+        type="text"
+        id="chatSearchInput"
+        placeholder="Search messages, users"
+        autocomplete="off"
+    >
+    <button id="chatSearchCloseBtn" class="chat-search-close-btn" type="button" aria-label="Close chat search" hidden>×</button>
+
+</div>
+
+<section id="activitySearchResults" class="activity-search-results" aria-live="polite" hidden></section>
+
+
+<!-- STORIES / THOUGHTS -->
+<section class="stories-section" aria-label="Stories and thoughts">
+    <div class="stories-title">
+        <span class="stories-status-dot" aria-hidden="true"></span>
+        <span>Stories / Thoughts</span>
+    </div>
+
+    <div
+        class="stories-row"
+        id="storiesThoughtsRow"
+    >
+
+        <!-- YOUR NOTE -->
+        <div
+            class="story-item your-note-item"
+            id="createThoughtItem"
+        >
+
+            <button
+                id="createThoughtBtn"
+                class="story-avatar your-note-avatar"
+                type="button"
+                aria-label="Create or replace your thought"
+            >
+                +
+            </button>
+
+            <span class="story-username">
+                Your Note
+            </span>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- NOTES / THOUGHT COMPOSER -->
+
+<div
+    id="noteComposerModal"
+    class="note-composer-modal"
+    hidden
+>
+
+<div
+    class="note-composer-backdrop"
+    id="noteComposerBackdrop"
+></div>
+
+<div
+    class="note-composer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="noteComposerTitle"
+>
+
+    <div class="note-composer-header">
+
+        <h2 id="noteComposerTitle">
+            Create Thought
+        </h2>
+
+        <button
+            id="closeNoteComposerBtn"
+            type="button"
+            class="note-close-btn"
+            aria-label="Close"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="note-composer-body">
+
+        <label class="thought-editor-field">
+            <span>Username</span>
+            <input id="thoughtEditorUsername" type="text" readonly>
+        </label>
+
+        <textarea
+            id="noteTextInput"
+            maxlength="60"
+            placeholder="Write a thought..."
+            rows="4"
+        ></textarea>
+
+        <div class="note-counter">
+            <span id="noteCharCount">0</span>/60
+        </div>
+
+        <div class="note-option-section">
+            <div class="note-option-title">
+                ♪ Add music (optional)
+            </div>
+            <button
+                id="openThoughtMusicPickerBtn"
+                class="note-music-picker-btn"
+                type="button"
+            >
+                ♪ Choose a song
+            </button>
+            <div
+                id="selectedThoughtMusic"
+                class="selected-thought-music"
+                aria-live="polite"
+                hidden
+            ></div>
+        </div>
+
+        <!-- MOOD / EMOJI -->
+
+        <div class="note-option-section">
+
+            <div class="note-option-title">
+                Mood / Emoji
+            </div>
+
+            <div
+                id="noteMoodOptions"
+                class="note-mood-options"
+            >
+                <button type="button" data-mood="">None</button>
+                <button type="button" data-mood="😊">😊</button>
+                <button type="button" data-mood="❤️">❤️</button>
+                <button type="button" data-mood="🔥">🔥</button>
+                <button type="button" data-mood="😎">😎</button>
+                <button type="button" data-mood="😂">😂</button>
+                <button type="button" data-mood="🥰">🥰</button>
+                <button type="button" data-mood="😢">😢</button>
+            </div>
+
+        </div>
+
+
+        <!-- AUDIENCE -->
+
+        <div class="note-option-section">
+
+            <div class="note-option-title">
+                Who can see this?
+            </div>
+
+            <select
+                id="noteAudienceSelect"
+                class="note-audience-select"
+            >
+                <option value="public">
+                    Public
+                </option>
+
+                <option value="friends">
+                    Friends
+                </option>
+
+                <option value="followers">
+                    Followers
+                </option>
+
+                <option value="private">
+                    Private / Only Me
+                </option>
+            </select>
+
+        </div>
+
+
+        <button
+            id="saveNoteBtn"
+            type="button"
+            class="save-note-btn"
+        >
+            Update
+        </button>
+
+        <div
+            id="noteComposerMessage"
+            class="note-composer-message"
+            aria-live="polite"
+        ></div>
+
+    </div>
+
+</div>
+
+</div>
+
+<div
+    id="thoughtMusicSheet"
+    class="thought-music-sheet"
+    hidden
+>
+    <div class="thought-music-sheet-scrim" data-thought-sheet-close></div>
+    <section
+        class="thought-music-sheet-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="thoughtSheetMetadata"
+    >
+        <div class="thought-sheet-handle" aria-hidden="true"></div>
+        <button
+            id="thoughtSheetAddSong"
+            class="thought-sheet-add-song"
+            type="button"
+        >Add song</button>
+        <div id="thoughtSheetMetadata" class="thought-sheet-metadata"></div>
+        <div class="thought-sheet-track">
+            <div id="thoughtSheetAvatar" class="thought-sheet-avatar"></div>
+            <div class="thought-sheet-track-content">
+                <div class="thought-sheet-music-bubble">
+                    <span aria-hidden="true">♪</span>
+                    <div class="thought-sheet-artist-viewport">
+                        <div id="thoughtSheetArtistTrack" class="thought-sheet-artist-track"></div>
+                    </div>
+                </div>
+                <div id="thoughtSheetTrackTitle" class="thought-sheet-track-title"></div>
+                <button
+                    id="thoughtSheetPlayButton"
+                    class="thought-sheet-play-button"
+                    type="button"
+                    aria-label="Play song preview"
+                    hidden
+                >▶ Preview</button>
+            </div>
+        </div>
+        <div id="thoughtSheetMood" class="thought-sheet-mood"></div>
+        <div
+            id="thoughtSheetKaraoke"
+            class="thought-sheet-karaoke"
+            aria-live="polite"
+        ></div>
+        <div id="thoughtSheetToast" class="thought-sheet-toast" role="status" aria-live="polite"></div>
+        <form id="thoughtSheetReplyForm" class="thought-sheet-reply-form">
+            <div class="thought-sheet-reply-pill">
+                <input
+                    id="thoughtSheetReplyInput"
+                    type="text"
+                    autocomplete="off"
+                    aria-label="Reply to Thought"
+                >
+                <div class="thought-sheet-quick-emojis" aria-label="Quick emoji replies">
+                    <button type="button" data-reply-emoji="🤷" aria-label="Insert 🤷">🤷</button>
+                    <button type="button" data-reply-emoji="😔" aria-label="Insert 😔">😔</button>
+                    <button type="button" data-reply-emoji="😍" aria-label="Insert 😍">😍</button>
+                </div>
+            </div>
+            <button
+                id="thoughtSheetHeart"
+                class="thought-sheet-heart"
+                type="button"
+                aria-label="Like Thought"
+                aria-pressed="false"
+            >♡</button>
+        </form>
+    </section>
+</div>
+
+<div
+    id="thoughtMusicPicker"
+    class="thought-music-picker"
+    hidden
+>
+    <div
+        class="thought-music-picker-backdrop"
+        id="thoughtMusicPickerBackdrop"
+    ></div>
+    <section
+        class="thought-music-picker-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="thoughtMusicPickerTitle"
+    >
+        <header class="thought-music-picker-header">
+            <h2 id="thoughtMusicPickerTitle">Choose a song</h2>
+            <button
+                id="closeThoughtMusicPickerBtn"
+                class="note-close-btn"
+                type="button"
+                aria-label="Close song picker"
+            >×</button>
+        </header>
+        <label class="thought-music-search">
+            <span aria-hidden="true">🔍</span>
+            <input
+                id="thoughtMusicSearchInput"
+                type="search"
+                placeholder="Search songs or artists..."
+                autocomplete="off"
+            >
+        </label>
+        <div
+            id="thoughtMusicProviders"
+            class="thought-music-providers"
+            role="group"
+            aria-label="Music provider"
+        >
+            <button type="button" data-music-provider="apple" aria-pressed="true">Apple Music</button>
+        </div>
+        <div
+            id="thoughtMusicPickerMessage"
+            class="thought-music-picker-message"
+            aria-live="polite"
+        >Search for a song to preview available tracks.</div>
+        <div
+            id="thoughtMusicResults"
+            class="thought-music-results"
+        ></div>
+        <button
+            id="thoughtMusicLoadMoreBtn"
+            class="thought-music-load-more"
+            type="button"
+            hidden
+        >Load More</button>
+        <footer class="thought-music-picker-actions">
+            <button
+                id="cancelThoughtMusicPickerBtn"
+                class="thought-music-cancel-btn"
+                type="button"
+            >Cancel</button>
+            <button
+                id="addThoughtMusicBtn"
+                class="thought-music-add-btn"
+                type="button"
+                disabled
+            >Add to my Thought</button>
+        </footer>
+    </section>
+</div>
+
+<!-- CHAT FILTERS -->
+
+<div class="chat-filters" role="group" aria-label="Conversation filters">
+
+    <button
+        class="filter-btn active"
+        data-filter="all"
+        aria-pressed="true"
+    >
+        All
+    </button>
+
+    <button
+        class="filter-btn"
+        data-filter="unread"
+        aria-pressed="false"
+    >
+        Unread
+    </button>
+
+    <button
+        class="filter-btn"
+        data-filter="groups"
+        aria-pressed="false"
+    >
+        Groups
+    </button>
+
+</div>
+
+    <!-- USER LIST -->
+
+    <section
+    id="userList"
+    class="user-list"
+    style="display:none;"
+>
+
+        <div class="section-title">
+            Start a chat
+        </div>
+<div class="chat-search">
+    <input
+        type="text"
+        id="userSearchInput"
+        placeholder="🔍 Search users..."
+        autocomplete="off"
+    >
+</div>
+
+
+        <div id="usersContainer">
+
+            <div class="loading">
+                Loading users...
+            </div>
+
+        </div>
+        <div id="groupsSection" style="display:none;">
+
+    <div class="chat-category-title">
+        👥 Groups
+    </div>
+
+    <div id="groupsContainer">
+
+        <div class="no-groups">
+            No groups yet
+        </div>
+
+    </div>
+
+</div>
+
+    </section>
+
+
+
+    <!-- CHAT AREA -->
+
+    <main
+        id="chatArea"
+        class="chat-area"
+    >
+
+        <div class="no-chat">
+            Select a user to start chatting 💬
+        </div>
+
+    </main>
+
+
+
+    <!-- MESSAGE BOX -->
+
+    <div
+        id="messageBox"
+        class="message-box"
+        style="display:none;"
+    >
+
+        <input
+            type="text"
+            id="messageInput"
+            placeholder="Message..."
+            autocomplete="off"
+        >
+
+        <button
+            id="sendBtn"
+        >
+            ➤
+        </button>
+
+    </div>
+
+    <div
+        id="callOverlay"
+        class="call-overlay hidden"
+        aria-live="polite"
+    >
+        <div class="call-panel">
+            <div class="call-header">
+                <button
+                    id="callMinimizeBtn"
+                    class="call-minimize-btn"
+                    type="button"
+                    aria-label="Minimize call"
+                >
+                    ←
+                </button>
+                <div class="call-user-block">
+                    <div id="callAvatar" class="call-avatar">U</div>
+                    <div>
+                        <div id="callUsername" class="call-username">User</div>
+                        <div id="callStatusText" class="call-status-text">Calling...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-display-area">
+                <video
+                    id="remoteVideo"
+                    class="remote-video"
+                    autoplay
+                    playsinline
+                ></video>
+
+                <video
+                    id="localVideo"
+                    class="local-video"
+                    autoplay
+                    muted
+                    playsinline
+                ></video>
+
+                <div id="callIdleState" class="call-idle-state" hidden>
+                    Connecting...
+                </div>
+            </div>
+
+            <div class="call-controls">
+                <button
+                    id="callMuteBtn"
+                    class="call-control-btn"
+                    type="button"
+                >
+                    🎤
+                </button>
+                <button
+                    id="callSpeakerBtn"
+                    class="call-control-btn"
+                    type="button"
+                >
+                    🔊
+                </button>
+                <button
+                    id="callCameraBtn"
+                    class="call-control-btn call-control-btn-secondary"
+                    type="button"
+                >
+                    📹
+                </button>
+                <button
+                    id="callSwitchCameraBtn"
+                    class="call-control-btn call-control-btn-secondary"
+                    type="button"
+                >
+                    🔄
+                </button>
+                <button
+                    id="callEndBtn"
+                    class="call-control-btn call-end-btn"
+                    type="button"
+                >
+                    ❌
+                </button>
+            </div>
+
+            <div class="call-timer" id="callTimer">00:00</div>
+
+            <div id="incomingCallPanel" class="incoming-call-panel hidden">
+                <div class="incoming-call-header">Incoming Call</div>
+                <div class="incoming-call-user">
+                    <div id="incomingCallAvatar" class="incoming-call-avatar">U</div>
+                    <div>
+                        <div id="incomingCallUsername" class="incoming-call-username">User</div>
+                        <div id="incomingCallType" class="incoming-call-type">Audio call</div>
+                    </div>
+                </div>
+                <div class="incoming-call-actions">
+                    <button
+                        id="declineCallBtn"
+                        class="incoming-action decline"
+                        type="button"
+                    >
+                        Decline
+                    </button>
+                    <button
+                        id="acceptCallBtn"
+                        class="incoming-action accept"
+                        type="button"
+                    >
+                        Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="chat.js"></script>
+
+
+</body>
+
+</html>

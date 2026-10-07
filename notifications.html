@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>inware - Notifications</title>
+
+    <link rel="stylesheet" href="notifications.css">
+</head>
+<body>
+
+    <header class="notifications-header">
+        <button id="backBtn" class="back-btn">←</button>
+        <h1>Notifications</h1>
+    </header>
+
+    <main class="notifications-container">
+
+        <div id="notificationsList">
+            <div class="loading-message">
+                Loading notifications...
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="notifications.js"></script>
+
+</body>
+</html>

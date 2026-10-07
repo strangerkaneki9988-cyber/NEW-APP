@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>inware - Home</title>
+
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+
+        <div class="brand">
+            inware
+        </div>
+
+        <div class="header-actions">
+    <button id="searchBtn">🔍</button>
+    <button id="notificationBtn">♡</button>
+   
+</div>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- STORIES -->
+        <section
+            class="stories"
+            id="storyRow"
+        >
+
+            <div
+                class="story"
+                id="yourStory"
+            >
+                <div class="story-avatar your-story-avatar">
+                    U
+                    <span class="add-story">+</span>
+                </div>
+                <span>Your story</span>
+            </div>
+
+            <div class="story">
+                <div class="story-avatar">A</div>
+                <span>Arjun</span>
+            </div>
+
+            <div class="story">
+                <div class="story-avatar">R</div>
+                <span>Rahul</span>
+            </div>
+
+            <div class="story">
+                <div class="story-avatar">P</div>
+                <span>Priya</span>
+            </div>
+
+            <div class="story">
+                <div class="story-avatar">S</div>
+                <span>Simran</span>
+            </div>
+
+        </section>
+
+
+        <!-- FEED -->
+        <section id="feed">
+
+            <!-- POST -->
+            <article class="post">
+
+                <div class="post-header">
+
+                    <div class="user-info">
+
+                        <div class="post-avatar">
+                            A
+                        </div>
+
+                        <div>
+                            <strong>inware_user</strong>
+                            <small>India</small>
+                        </div>
+
+                    </div>
+
+                    <button class="more-btn">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="post-image">
+                    <div class="demo-image">
+                        inware
+                    </div>
+                </div>
+
+
+                <div class="post-actions">
+
+                    <div class="left-actions">
+
+                        <button class="action-btn like-btn">
+                            ♡
+                        </button>
+
+                        <button class="action-btn comment-btn">
+                            💬
+                        </button>
+
+                        <button class="action-btn share-btn">
+                            ➤
+                        </button>
+
+                    </div>
+
+                    <button class="action-btn save-btn">
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="post-content">
+
+                    <strong>
+                        24 likes
+                    </strong>
+
+                    <p>
+                        <b>inware_user</b>
+                        Welcome to inware 🚀
+                    </p>
+
+                    <button class="comments-link">
+                        View all comments
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <div
+        id="storyUploadModal"
+        class="story-upload-modal"
+        style="display:none;"
+    >
+
+        <div class="story-upload-sheet">
+
+            <h2>Add to your story</h2>
+
+            <input
+                id="storyMentionInput"
+                class="story-mention-input"
+                type="text"
+                placeholder="Mention users, e.g. @rahul"
+                autocomplete="off"
+            >
+
+            <div
+                id="storyMentionSuggestions"
+                class="story-mention-suggestions"
+                hidden
+            ></div>
+
+            <small class="story-mention-help">
+                Use @username to mention an existing user.
+            </small>
+
+            <button
+                id="storyPictureBtn"
+                type="button"
+            >
+                Upload Picture
+            </button>
+
+            <button
+                id="storyVideoBtn"
+                type="button"
+            >
+                Upload Video
+            </button>
+
+            <div
+                id="storyUploadStatus"
+                class="story-upload-status"
+            ></div>
+
+            <button
+                id="cancelStoryUpload"
+                type="button"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        id="storyViewerModal"
+        class="story-viewer-modal"
+        style="display:none;"
+    >
+
+        <button
+            id="closeStoryViewer"
+            class="story-viewer-close"
+            type="button"
+        ></button>
+
+        <button
+            id="previousStory"
+            class="story-viewer-nav story-viewer-previous"
+            type="button"
+        ></button>
+
+        <div class="story-viewer-content">
+            <div
+                id="storyViewerMedia"
+                class="story-viewer-media"
+            ></div>
+
+            <div
+                id="storyViewerProgress"
+                class="story-viewer-progress"
+            ></div>
+
+            <button
+                id="addStoryFromViewer"
+                class="add-story-from-viewer"
+                type="button"
+                hidden
+            >
+                Add Story
+            </button>
+
+            <button
+                id="storyViewsButton"
+                class="story-views-button"
+                type="button"
+                aria-label="Story views"
+                hidden
+            >
+                👁️
+            </button>
+
+            <button id="storyLikeButton" class="story-like-button" type="button"
+        aria-label="Like story" hidden>
+    ♡
+</button>
+
+        </div>
+ 
+        
+
+        <button
+            id="nextStory"
+            class="story-viewer-nav story-viewer-next"
+            type="button"
+        ></button>
+
+    </div>
+
+    <div
+        id="storyViewersModal"
+        class="story-viewers-modal"
+        style="display:none;"
+    >
+
+        <div class="story-viewers-sheet">
+
+            <div class="story-viewers-header">
+                <h2>Seen by</h2>
+
+                <button
+                    id="closeStoryViewers"
+                    type="button"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div
+                id="storyViewersList"
+                class="story-viewers-list"
+            ></div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="homeCommentsModal"
+        class="home-comments-modal"
+        style="display:none;"
+    >
+
+        <div class="home-comments-sheet">
+
+            <div class="home-comments-header">
+                <h2>Comments</h2>
+
+                <button
+                    id="closeHomeComments"
+                    type="button"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div
+                id="homeCommentsList"
+                class="home-comments-list"
+            ></div>
+
+            <div class="comment-box home-comments-input-box">
+
+                <input
+                    type="text"
+                    class="comment-input"
+                    placeholder="Write a comment..."
+                >
+
+                <button
+                    class="comment-submit"
+                    type="button"
+                >
+                    Post
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+
+        <button class="nav-item active">
+            <span>⌂</span>
+            <small>Home</small>
+        </button>
+
+<button class="nav-item" id="reelsNav">
+    <span>▶</span>
+    <small>Reels</small>
+</button>
+
+        <button class="nav-item" id="searchNav">
+            <span>⌕</span>
+            <small>Search</small>
+        </button>
+
+        <button class="nav-item create" id="createPost">
+            <span>＋</span>
+            <small>Post</small>
+        </button>
+        <div id="postOptions" class="post-options" style="display:none;">
+    <button id="uploadPictureBtn" type="button">
+        📸 Upload Picture
+    </button>
+
+    <button id="uploadVideoBtn" type="button">
+        🎥 Upload Video
+    </button>
+</div>
+<input
+    type="file"
+    id="postImageInput"
+    accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime"
+    style="display:none;"
+>
+<input
+    type="file"
+    id="storyFileInput"
+    style="display:none;"
+>
+        <button class="nav-item" id="chatNav">
+            <span>♡</span>
+            <small>Activity</small>
+        </button>
+
+        <button class="nav-item" id="profileNav">
+            <span>●</span>
+            <small>Profile</small>
+        </button>
+
+    </nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="home.js"></script>
+
+</body>
+</html>

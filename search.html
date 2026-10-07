@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>inware - Search</title>
+
+    <link rel="stylesheet" href="search.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="search-header">
+
+        <button id="backBtn" class="back-btn">
+            ←
+        </button>
+
+        <h1>Search</h1>
+
+    </header>
+
+
+    <!-- SEARCH BOX -->
+    <main class="search-container">
+
+        <div class="search-box">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search users..."
+                autocomplete="off"
+            >
+
+            <button id="clearBtn">
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- RESULTS -->
+        <section id="searchResults">
+
+            <div class="empty-message">
+                Search for users
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="search.js"></script>
+
+</body>
+</html>
+
